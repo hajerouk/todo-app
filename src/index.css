@@ -1,13 +1,84 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  --gap: 8px;
+  --accent: #2b6cb0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  font-family: Inter, system-ui, Arial, sans-serif;
+  background: #f7fafc;
+  margin: 0;
+  color: #111827;
 }
+
+.container {
+  max-width: 780px;
+  margin: 32px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(11, 15, 26, 0.06);
+}
+
+.header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.header nav a {
+  margin-left: 12px;
+  text-decoration: none;
+  color: #4b5563;
+}
+
+.header nav a.active { font-weight: 700; color: var(--accent); }
+
+.add-task-form {
+  display:flex;
+  gap: var(--gap);
+  margin-bottom: 12px;
+}
+
+.add-task-form input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+}
+
+.add-task-form button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+}
+
+.task-row {
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  padding: 10px 6px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.task-desc { flex: 1; }
+
+.task-actions button {
+  margin-left: 6px;
+  padding: 6px 8px;
+  border: none;
+  border-radius: 6px;
+  background: #e6edf7;
+  cursor: pointer;
+}
+
+.task-edit-input {
+  flex: 1;
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+}
+
+.empty { color: #6b7280; }
