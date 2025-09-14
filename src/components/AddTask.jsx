@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addTask } from '../features/tasksSlice';
+import { addTask } from '../actions/taskActions';
 
 export default function AddTask() {
   const [text, setText] = useState('');
@@ -15,13 +15,8 @@ export default function AddTask() {
   };
 
   return (
-    <form onSubmit={submit} className="add-task-form">
-      <input
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        placeholder="Add a new task..."
-        aria-label="New task description"
-      />
+    <form onSubmit={submit} style={{ marginBottom: '12px' }}>
+      <input value={text} onChange={(e) => setText(e.target.value)} placeholder="Add new task" />
       <button type="submit">Add</button>
     </form>
   );

@@ -5,16 +5,15 @@ import DoneTasks from './pages/DoneTasks';
 
 export default function App() {
   return (
-    <div className="container">
-      <header className="header">
-        <h1>ToDo App</h1>
+    <div style={{ maxWidth: '600px', margin: '40px auto' }}>
+      <header style={{ display:'flex', justifyContent:'space-between', marginBottom:'20px' }}>
+        <h1>ToDo (Redux Classique)</h1>
         <nav>
-          <NavLink to="/" end className={({isActive}) => isActive ? 'active' : ''}>Todos</NavLink>
-          <NavLink to="/done" className={({isActive}) => isActive ? 'active' : ''}>Done</NavLink>
+          <NavLink to="/" style={{ marginRight:8 }}>Todos</NavLink>
+          <NavLink to="/done">Done</NavLink>
         </nav>
       </header>
-
-      <main className="main">
+      <main>
         <Routes>
           <Route path="/" element={<AllTasks />} />
           <Route path="/done" element={<DoneTasks />} />

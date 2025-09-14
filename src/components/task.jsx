@@ -1,54 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { toggleDone, editTask, removeTask } from '../features/tasksSlice';
+import { toggleDone, editTask, removeTask } from '../actions/taskActions';
 
 export default function Task({ task }) {
   const dispatch = useDispatch();
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState(task.description);
 
-  useEffect(() => {
-    setDraft(task.description); // keep in sync if external changes happen
-  }, [task.description]);
-
   const save = () => {
     const val = draft.trim();
     if (!val) return;
-    dispatch(editTask({ id: task.id, description: val }));
+    dispatch(editTask(task.id, val));
     setEditing(false);
   };
 
   return (
-    <div className="task-row">
-      <input
-        type="checkbox"
-        checked={task.isDone}
-        onChange={() => dispatch(toggleDone(task.id))}
-        aria-label={`Mark ${task.description} as done`}
-      />
-
+    <div style={{ display:'flex', alignItems:'center', marginBottom:'6px' }}>
+      <input type="checkbox" checked={task.isDone} onChange={() => dispatch(toggleDone(task.id))} />
       {!editing ? (
         <>
-          <div className="task-desc" style={{ textDecoration: task.isDone ? 'line-through' : 'none' }}>
-            {task.description}
-          </div>
-          <div className="task-actions">
-            <button onClick={() => setEditing(true)}>Edit</button>
-            <button onClick={() => dispatch(removeTask(task.id))}>Delete</button>
-          </div>
+          <span style={{ marginLeft: 8, textDecoration: task.isDone ? 'line-through' : 'none' }}>{task.description}</span>
+          <button onClick={() => setEditing(true)} style={{ marginLeft: 8 }}>Edit</button>
+          <button onClick={() => dispatch(removeTask(task.id))} style={{ marginLeft: 4 }}>Delete</button>
         </>
       ) : (
         <>
-          <input
-            className="task-edit-input"
-            value={draft}
-            onChange={(e) => setDraft(e.target.value)}
-            onKeyDown={(e) => { if (e.key === 'Enter') save(); if (e.key === 'Escape') { setEditing(false); setDraft(task.description); } }}
-          />
-          <div className="task-actions">
-            <button onClick={save}>Save</button>
-            <button onClick={() => { setEditing(false); setDraft(task.description); }}>Cancel</button>
-          </div>
+          <input value={draft} onChange={e => setDraft(e.target.value)} style={{ marginLeft: 8 }} />
+          <button onClick={save} style={{ marginLeft: 8 }}>Save</button>
+          <button onClick={() => { setEditing(false); setDraft(task.description); }} style={{ marginLeft: 4 }}>Cancel</button>
         </>
       )}
     </div>
